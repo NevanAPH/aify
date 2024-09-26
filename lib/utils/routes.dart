@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 // Import pages
 import 'package:aify/pages/welcome_page.dart';
 import 'package:aify/pages/auth/login_page.dart';
+import 'package:aify/pages/auth/register_page.dart';
 
 List<GetPage> pages = [
   GetPage(
@@ -29,6 +30,11 @@ List<GetPage> pages = [
   GetPage(
     name: '/auth/login',
     page: () => LoginPage(),
+    binding: AuthBindings()
+  ),
+  GetPage(
+    name: '/auth/register',
+    page: () => const RegisterPage(),
     binding: AuthBindings()
   ),
 ];
