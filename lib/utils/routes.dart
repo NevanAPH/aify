@@ -1,7 +1,11 @@
-import 'package:aify/pages/welcome_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:aify/bindings/auth_bindings.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+
+// Import pages
+import 'package:aify/pages/welcome_page.dart';
+import 'package:aify/pages/auth/login_page.dart';
 
 List<GetPage> pages = [
   GetPage(
@@ -21,5 +25,10 @@ List<GetPage> pages = [
     page: () => const WelcomePage(),
     transition: Transition.fadeIn,
     transitionDuration: const Duration(milliseconds: 500),
+  ),
+  GetPage(
+    name: '/auth/login',
+    page: () => LoginPage(),
+    binding: AuthBindings()
   ),
 ];
