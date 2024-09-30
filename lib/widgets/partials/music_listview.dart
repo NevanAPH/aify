@@ -1,4 +1,3 @@
-import 'dart:ffi' as ffi;
 
 import 'package:aify/models/music_model.dart';
 import 'package:aify/utils/theme.dart';
@@ -23,7 +22,7 @@ class MusicListView extends StatelessWidget {
           onPressed: action,
           style: ElevatedButton.styleFrom(
               enableFeedback: true,
-              maximumSize: const Size(double.infinity, 88),
+              maximumSize: const Size(double.infinity, 92),
               padding: EdgeInsets.zero,
               backgroundColor: AppTheme.backgroundLightColor,
               shape: RoundedRectangleBorder(

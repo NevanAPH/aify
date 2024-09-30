@@ -116,7 +116,6 @@ class LoginPartialPage extends StatelessWidget {
                     auth.setSubmitting(false);
                     menu.setLocked(false);
                     auth.setError1(message);
-                    auth.setError2(message);
                   }
                 },
                 loading: auth.loading.value)

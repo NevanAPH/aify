@@ -18,7 +18,7 @@ class ShimmerVertical extends StatelessWidget {
         itemBuilder: (context, index) {
           return Container(
             width: double.infinity,
-            height: 88,
+            height: 92,
             margin: const EdgeInsets.only(bottom: 16),
             decoration: BoxDecoration(
               color:

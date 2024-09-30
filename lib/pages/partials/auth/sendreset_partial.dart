@@ -56,7 +56,7 @@ class SendresetPartialPage extends StatelessWidget {
                   auth.setSubmitting(false);
                   menu.setLocked(false);
 
-                  auth.setError1("Something wrong has occured.\nPlease contact support for help.");
+                  auth.setError1("Functionality not implemented yet.");
                 },
                 loading: auth.loading.value)
           ],

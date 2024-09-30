@@ -82,6 +82,7 @@ class TextFieldWidget extends StatelessWidget {
           borderSide: BorderSide(color: errorColor ?? AppTheme.errorColor, width: borderWidth ?? 2.0),
           borderRadius: BorderRadius.circular(borderRadius ?? 12.0)
         ),
+        filled: backgroundColor != null && backgroundColor != Colors.transparent,
         fillColor: backgroundColor,
       ),
       style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: foregroundColor ?? AppTheme.white100),

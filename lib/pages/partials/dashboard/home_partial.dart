@@ -38,10 +38,10 @@ class HomePartialPage extends StatelessWidget {
                       ? const ShimmerHorizontal()
                       : SizedBox(
                           height:
-                              creations.now_trending.value.isEmpty ? 100 : 160,
+                              creations.now_trending.isEmpty ? 100 : 160,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: creations.now_trending.value.isEmpty
+                            child: creations.now_trending.isEmpty
                                 ? Container(
                                     decoration: BoxDecoration(
                                       color: AppTheme.backgroundLightColor,
@@ -63,7 +63,7 @@ class HomePartialPage extends StatelessWidget {
                                     direction: Axis.horizontal,
                                     spacing: 16,
                                     children: List<Widget>.from(creations
-                                        .now_trending.value
+                                        .now_trending
                                         .map((music) {
                                       return MusicCarousel(
                                           action: () {},
@@ -79,7 +79,7 @@ class HomePartialPage extends StatelessWidget {
                   action: () {},
                   child: !creations.my_creations_loaded.value
                       ? const ShimmerVertical()
-                      : creations.my_creations.value.isEmpty
+                      : creations.my_creations.isEmpty
                           ? Container(
                               decoration: BoxDecoration(
                                 color: AppTheme.backgroundLightColor,
