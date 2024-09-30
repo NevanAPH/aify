@@ -1,3 +1,4 @@
+import 'package:aify/pages/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:aify/bindings/auth_bindings.dart';
@@ -37,4 +38,8 @@ List<GetPage> pages = [
     page: () => const RegisterPage(),
     binding: AuthBindings()
   ),
+  GetPage(
+    name: '/home',
+    page: () => const DashboardPage()
+  )
 ];

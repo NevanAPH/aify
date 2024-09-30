@@ -31,11 +31,19 @@ dependencies:
   # URL launcher
   url_launcher: ^6.3.0
 
+  # Shimmering effects
+  shimmer: ^3.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+
+  # Generate dart environment variables
   dart_define: ^2.1.1
+
+  # Generate app icons
+  flutter_launcher_icons: ^0.14.1
 
 flutter:
   uses-material-design: true

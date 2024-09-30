@@ -17,6 +17,7 @@ class AppTheme {
   static const Color errorColorLight = Color(0xFFFF8585);
   static const Color errorColorDark = Color(0xFFEA4747);
   static const Color backgroundColor = Color(0xFF04040B);
+  static const Color backgroundLightColor = Color(0xFF0C0C20);
 
   static const Color white100 = Color(0xFFFFFFFF);
   static const Color white90 = Color(0xFFEEEEEE);
@@ -53,7 +54,7 @@ class AppTheme {
         ),
         titleSmall: GoogleFonts.getFont('Outfit', 
           color: AppTheme.textPrimaryColor,
-          fontSize: 24,
+          fontSize: 28,
           fontWeight: FontWeight.w600,
         ),
 

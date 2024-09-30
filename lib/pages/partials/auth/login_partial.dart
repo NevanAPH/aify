@@ -6,8 +6,11 @@ import 'package:aify/utils/theme.dart';
 import 'package:aify/widgets/button_widget.dart';
 import 'package:aify/widgets/partials/auth_button.dart';
 import 'package:aify/widgets/textfield_widget.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPartialPage extends StatelessWidget {
+
+  final supabase = Supabase.instance.client;
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final AuthController auth = Get.find();
@@ -81,12 +84,40 @@ class LoginPartialPage extends StatelessWidget {
                   auth.setSubmitting(true);
                   menu.setLocked(true);
 
-                  await Future.delayed(const Duration(seconds: 3));
-                  auth.setSubmitting(false);
-                  menu.setLocked(false);
+                  try {
+                    final AuthResponse res = await supabase.auth.signInWithPassword(
+                      email: _emailController.text, 
+                      password: _passwordController.text
+                    );
+                    
+                    // check if user is authenticated
+                    if (res.user != null) {
+                      Get.offAllNamed('/home');
+                      return;
+                    }
 
-                  auth.setError1("Email/password is invalid.");
-                  auth.setError2("Email/password is invalid.");
+                    auth.setError1("An error occurred. Please try again.");
+                    auth.setError2("An error occurred. Please try again.");
+
+                  }
+                  catch (error) {
+                    final AuthException e = error as AuthException;
+                    String message = "An error occurred. Please try again.";
+
+                    switch(e.message.toLowerCase()) {
+                      case "invalid login credentials":
+                        message = "Email/password is invalid.";
+                        break;
+                      default:
+                        message = "An error occurred. Please try again.";
+                        break;
+                    }
+
+                    auth.setSubmitting(false);
+                    menu.setLocked(false);
+                    auth.setError1(message);
+                    auth.setError2(message);
+                  }
                 },
                 loading: auth.loading.value)
           ],
