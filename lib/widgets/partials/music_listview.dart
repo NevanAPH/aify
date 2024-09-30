@@ -57,6 +57,7 @@ class MusicListView extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 260),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(music.title,
                           style: Theme.of(context)
