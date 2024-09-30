@@ -92,7 +92,7 @@ class LoginPartialPage extends StatelessWidget {
                     
                     // check if user is authenticated
                     if (res.user != null) {
-                      Get.offAllNamed('/home');
+                      Get.offAllNamed('/');
                       return;
                     }
 

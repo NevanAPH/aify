@@ -1,157 +1,86 @@
-import 'package:aify/models/music_model.dart';
-import 'package:aify/utils/datas.dart';
-import 'package:aify/utils/theme.dart';
-import 'package:aify/widgets/partials/music_carousel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:shimmer/shimmer.dart';
+
+import 'package:aify/utils/theme.dart';
+import 'package:aify/controllers/menus_controller.dart';
+import 'package:aify/pages/partials/dashboard/home_partial.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({super.key});
+  
+  DashboardPage({super.key});
+
+  final MenusController menu = Get.find();
+  final List<Widget> _pages = [HomePartialPage()];
 
   @override
   Widget build(BuildContext context) {
+    final controller = PageController();
+    menu.selected.listen((value) {
+      if (menu.locked.value) return;
+      controller.animateToPage(value,
+          duration: const Duration(milliseconds: 200), curve: Curves.easeOut);
+    });
+
     return Scaffold(
+      extendBody: true,
       body: Stack(
         children: [
           Image.asset('assets/images/backgrounds/main.png',
               width: Get.width, fit: BoxFit.contain),
-          SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minWidth: Get.width),
-              child: Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 64, horizontal: 32),
-                child: Column(
-                  children: [
-                    // Grouped
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 32),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Now Trending',
-                                style: Theme.of(context).textTheme.titleSmall,
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Row(children: [
-                                  Text(
-                                    'See more',
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  const Icon(Icons.arrow_forward,
-                                      color: AppTheme.textPrimaryColor)
-                                ]),
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          //_shimmerHorizontal(context),
-                          SizedBox(
-                            height: 180,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Wrap(
-                                direction: Axis.horizontal,
-                                spacing: 16,
-                                children: List<Widget>.from(
-                                    now_trending.map((musicData) {
-                                  return MusicCarousel(
-                                      music: MusicModel.from(musicData));
-                                })),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-
-                    Container(
-                      margin: const EdgeInsets.only(bottom: 32),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Your creations',
-                                style: Theme.of(context).textTheme.titleSmall,
-                              ),
-                              TextButton(
-                                onPressed: () {},
-                                child: Row(children: [
-                                  Text(
-                                    'Go to library',
-                                    style:
-                                        Theme.of(context).textTheme.bodyMedium,
-                                  ),
-                                  const SizedBox(width: 8),
-                                  const Icon(Icons.arrow_forward,
-                                      color: AppTheme.textPrimaryColor)
-                                ]),
-                              )
-                            ],
-                          ),
-                          const SizedBox(height: 8),
-                          //_shimmerHorizontal(context),
-                          SizedBox(
-                            height: 160,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Wrap(
-                                direction: Axis.horizontal,
-                                spacing: 16,
-                                children: List<Widget>.from(
-                                    now_trending.map((musicData) {
-                                  return MusicCarousel(
-                                      music: MusicModel.from(musicData));
-                                })),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          )
+          PageView(
+                physics: const NeverScrollableScrollPhysics(),
+                controller: controller,
+                children: _pages),
+          
         ],
       ),
 
       // create bottom navigation bar
-      bottomNavigationBar: const BottomAppBar(
+      bottomNavigationBar: BottomAppBar(
         color: AppTheme.backgroundLightColor,
-        shape: CircularNotchedRectangle(),
+        shape: const CircularNotchedRectangle(),
+        height: 80.0,
         notchMargin: 12.0,
+        padding: const EdgeInsets.symmetric(horizontal: 28.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[],
+          children: <Widget>[
+            IconButton(
+              icon: const Icon(Icons.home, color: AppTheme.primaryColorLight, size: 28),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(Icons.search, color: AppTheme.textPrimaryColor, size: 28),
+              onPressed: () {},
+            ),
+            const SizedBox(width: 64.0),
+            IconButton(
+              icon: const Icon(Icons.my_library_books, color: AppTheme.textPrimaryColor, size: 28),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(Icons.person, color: AppTheme.textPrimaryColor, size: 28),
+              onPressed: () {},
+            ),
+          ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
 
       // create circle floating action button
       floatingActionButton: SizedBox(
-        width: 80.0,
-        height: 80.0,
+        width: 72.0,
+        height: 72.0,
         child: FittedBox(
           child: FloatingActionButton(
             backgroundColor: Colors.transparent,
             onPressed: () {},
             shape: const CircleBorder(),
             child: Container(
-              width: 80.0,
-              height: 80.0,
+              width: 72.0,
+              height: 72.0,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 gradient: LinearGradient(
@@ -166,33 +95,6 @@ class DashboardPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: SvgPicture.asset('assets/icons/white/spark.svg'),
             ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _shimmerHorizontal(BuildContext context) {
-    return SizedBox(
-      height: 180,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        physics: const NeverScrollableScrollPhysics(),
-        child: Shimmer.fromColors(
-          baseColor: AppTheme.backgroundLightColor,
-          highlightColor: const Color.fromARGB(255, 23, 23, 56),
-          child: Row(
-            children: List.generate(3, (index) {
-              return Container(
-                margin: const EdgeInsets.only(right: 16),
-                width: 300,
-                height: 180,
-                decoration: BoxDecoration(
-                  color: AppTheme.backgroundLightColor,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-              );
-            }),
           ),
         ),
       ),

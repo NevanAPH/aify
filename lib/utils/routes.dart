@@ -1,13 +1,16 @@
-import 'package:aify/pages/dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:aify/bindings/auth_bindings.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Import pages
 import 'package:aify/pages/welcome_page.dart';
 import 'package:aify/pages/auth/login_page.dart';
 import 'package:aify/pages/auth/register_page.dart';
+import 'package:aify/pages/dashboard_page.dart';
+
+// Import bindings
+import 'package:aify/bindings/auth_bindings.dart';
+import 'package:aify/bindings/dash_bindings.dart';
 
 List<GetPage> pages = [
   GetPage(
@@ -40,6 +43,9 @@ List<GetPage> pages = [
   ),
   GetPage(
     name: '/home',
-    page: () => const DashboardPage()
+    page: () => DashboardPage(),
+    binding: DashBindings(),
+    transition: Transition.fadeIn,
+    transitionDuration: const Duration(milliseconds: 500),
   )
 ];

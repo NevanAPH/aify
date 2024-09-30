@@ -1,13 +1,13 @@
 
 class MusicModel {
-  final String uuid;
+  final String id;
   final String title;
-  final String description;
+  final String? description;
   final List<String> tags;
-  final String image;
+  final String? image;
 
   MusicModel({
-    required this.uuid,
+    required this.id,
     required this.title,
     required this.description,
     required this.tags,
@@ -16,7 +16,7 @@ class MusicModel {
 
   factory MusicModel.from(data) {
     return MusicModel(
-      uuid: data['uuid'],
+      id: data['id'],
       title: data['title'],
       description: data['description'],
       tags: List<String>.from(data['tags']),
