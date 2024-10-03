@@ -21,8 +21,9 @@ class SearchPartialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    creations.getNowTrending();
-    creations.getMyCreations();
+    creations.getMightLike();
+    creations.getExploreNew();
+    creations.getCreatorPicks();
 
     return SingleChildScrollView(
       child: ConstrainedBox(
@@ -45,14 +46,14 @@ class SearchPartialPage extends StatelessWidget {
                   title: "You might like",
                   actionName: "See more",
                   action: () {},
-                  child: !creations.now_trending_loaded.value
+                  child: !creations.explore_new_loaded.value
                       ? const ShimmerHorizontal()
                       : SizedBox(
                           height:
-                              creations.now_trending.isEmpty ? 100 : 160,
+                              creations.might_like.isEmpty ? 100 : 160,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: creations.now_trending.isEmpty
+                            child: creations.might_like.isEmpty
                                 ? Container(
                                     decoration: BoxDecoration(
                                       color: AppTheme.backgroundLightColor,
@@ -74,7 +75,7 @@ class SearchPartialPage extends StatelessWidget {
                                     direction: Axis.horizontal,
                                     spacing: 16,
                                     children: List<Widget>.from(creations
-                                        .now_trending
+                                        .might_like
                                         .map((music) {
                                       return MusicCarousel(
                                           action: () {},
@@ -87,14 +88,14 @@ class SearchPartialPage extends StatelessWidget {
                   title: "Explore new",
                   actionName: "See more",
                   action: () {},
-                  child: !creations.now_trending_loaded.value
+                  child: !creations.explore_new_loaded.value
                       ? const ShimmerHorizontal()
                       : SizedBox(
                           height:
-                              creations.now_trending.isEmpty ? 100 : 160,
+                              creations.explore_new.isEmpty ? 100 : 160,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: creations.now_trending.isEmpty
+                            child: creations.explore_new.isEmpty
                                 ? Container(
                                     decoration: BoxDecoration(
                                       color: AppTheme.backgroundLightColor,
@@ -116,7 +117,7 @@ class SearchPartialPage extends StatelessWidget {
                                     direction: Axis.horizontal,
                                     spacing: 16,
                                     children: List<Widget>.from(creations
-                                        .now_trending
+                                        .explore_new
                                         .map((music) {
                                       return MusicCarousel(
                                           action: () {},
@@ -129,14 +130,14 @@ class SearchPartialPage extends StatelessWidget {
                   title: "Top creator picks",
                   actionName: "See more",
                   action: () {},
-                  child: !creations.now_trending_loaded.value
+                  child: !creations.creator_picks_loaded.value
                       ? const ShimmerHorizontal()
                       : SizedBox(
                           height:
-                              creations.now_trending.isEmpty ? 100 : 160,
+                              creations.creator_picks.isEmpty ? 100 : 160,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
-                            child: creations.now_trending.isEmpty
+                            child: creations.creator_picks.isEmpty
                                 ? Container(
                                     decoration: BoxDecoration(
                                       color: AppTheme.backgroundLightColor,
@@ -158,7 +159,7 @@ class SearchPartialPage extends StatelessWidget {
                                     direction: Axis.horizontal,
                                     spacing: 16,
                                     children: List<Widget>.from(creations
-                                        .now_trending
+                                        .creator_picks
                                         .map((music) {
                                       return MusicCarousel(
                                           action: () {},

@@ -33,7 +33,7 @@ class HomePartialPage extends StatelessWidget {
               Obx(() => DashMenuGroup(
                   title: "Now Trending",
                   actionName: "See more",
-                  action: () {},
+                  action: () => menu.selected.value = 1,
                   child: !creations.now_trending_loaded.value
                       ? const ShimmerHorizontal()
                       : SizedBox(
@@ -76,7 +76,7 @@ class HomePartialPage extends StatelessWidget {
                 () => DashMenuGroup(
                   title: "Your last creations",
                   actionName: "Library",
-                  action: () {},
+                  action: () => menu.selected.value = 3,
                   child: !creations.my_creations_loaded.value
                       ? const ShimmerVertical()
                       : creations.my_creations.isEmpty

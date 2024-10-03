@@ -43,7 +43,20 @@ class DashboardPage extends StatelessWidget {
         children: [
           Image.asset('assets/images/backgrounds/main.png',
               width: Get.width, fit: BoxFit.contain),
-          PageView(controller: controller, children: _pages, physics: const NeverScrollableScrollPhysics(),),
+          PageView(
+            controller: controller,
+            children: _pages,
+            physics: const NeverScrollableScrollPhysics(),
+          ),
+          Obx(() => PopScope(
+                canPop: !menu.locked.value && menu.selected.value == 0,
+                child: const SizedBox(),
+                onPopInvokedWithResult: (didPop, result) {
+                  if (menu.selected.value != 0 && !menu.locked.value) {
+                    menu.setSelected(0);
+                  }
+                },
+              ))
         ],
       ),
 

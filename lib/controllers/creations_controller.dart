@@ -38,6 +38,54 @@ class CreationsController extends GetxController {
     }
   }
 
+  getMightLike({ int? limit }) async {
+    try {
+      final res = await client.from('might_like').select('content:content_id (*)').limit(limit ?? 10);
+      final List<MusicModel> mightLikeList = (res as List)
+          .map((item) => MusicModel.from(item['content']))
+          .toList();
+      
+      might_like.value = mightLikeList;
+      might_like_loaded.value = true;
+
+      return res;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  getExploreNew({ int? limit }) async {
+    try {
+      final res = await client.from('explore_new').select('content:content_id (*)').limit(limit ?? 10);
+      final List<MusicModel> exploreNewList = (res as List)
+          .map((item) => MusicModel.from(item['content']))
+          .toList();
+      
+      explore_new.value = exploreNewList;
+      explore_new_loaded.value = true;
+
+      return res;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  getCreatorPicks({ int? limit }) async {
+    try {
+      final res = await client.from('creator_picks').select('content:content_id (*)').limit(limit ?? 10);
+      final List<MusicModel> creatorPicksList = (res as List)
+          .map((item) => MusicModel.from(item['content']))
+          .toList();
+      
+      creator_picks.value = creatorPicksList;
+      creator_picks_loaded.value = true;
+
+      return res;
+    } catch (e) {
+      return null;
+    }
+  }
+
   getMyCreations({ int? limit }) async {
     try {
       final res = await client.from('users_creations')
