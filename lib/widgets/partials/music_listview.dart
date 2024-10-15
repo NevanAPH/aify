@@ -5,12 +5,16 @@ import 'package:flutter/material.dart';
 
 class MusicListView extends StatelessWidget {
 
-  final VoidCallback action;
+  final VoidCallback onClick;
+  final VoidCallback onLike;
   final MusicModel music;
+  final bool liked;
 
   const MusicListView({
     super.key, 
-    required this.action,
+    required this.onClick,
+    required this.onLike,
+    required this.liked,
     required this.music
   });
 
@@ -19,7 +23,7 @@ class MusicListView extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.only(bottom: 16),
       child: ElevatedButton(
-          onPressed: action,
+          onPressed: onClick,
           style: ElevatedButton.styleFrom(
               enableFeedback: true,
               maximumSize: const Size(double.infinity, 92),
@@ -34,7 +38,7 @@ class MusicListView extends StatelessWidget {
                 image: NetworkImage(music.image!),
                 fit: BoxFit.cover,
                 colorFilter: ColorFilter.mode(
-                    Colors.black.withOpacity(0.7), BlendMode.darken),
+                    Colors.black.withOpacity(0.8), BlendMode.darken),
               ),
               borderRadius: BorderRadius.circular(20.0),
             ),
@@ -53,28 +57,42 @@ class MusicListView extends StatelessWidget {
                       ? null
                       : Image.network(music.image!),
                 ),
-                Container(
-                  constraints: const BoxConstraints(maxWidth: 260),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(music.title,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall!
-                              .copyWith(height: 1.0),
-                          overflow: TextOverflow.fade,
-                          maxLines: 1,
-                          softWrap: false),
-                      Text(music.description ?? 'No description.',
-                          style: Theme.of(context).textTheme.bodyMedium,
-                          overflow: TextOverflow.fade,
-                          maxLines: 1,
-                          softWrap: false)
-                    ],
+                Expanded(
+                  child: Container(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(music.title,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleSmall!
+                                .copyWith(height: 1.0),
+                            overflow: TextOverflow.fade,
+                            maxLines: 1,
+                            softWrap: false),
+                        Text(music.description ?? 'No description.',
+                            style: Theme.of(context).textTheme.bodyMedium,
+                            overflow: TextOverflow.fade,
+                            maxLines: 1,
+                            softWrap: false)
+                      ],
+                    ),
                   ),
                 ),
+                const SizedBox(width: 16,),
+                IconButton(
+                  onPressed: onLike,
+                  iconSize: 28, 
+                  icon: Icon(
+                    liked == true
+                    ? Icons.favorite 
+                    : Icons.favorite_border,
+                  ),
+                  color: liked == true
+                    ? AppTheme.errorColorLight
+                    : AppTheme.white90,
+                )
               ],
             ),
           ),

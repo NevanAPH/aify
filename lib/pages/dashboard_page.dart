@@ -1,3 +1,4 @@
+import 'package:aify/pages/partials/dashboard/create_partial.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -17,9 +18,9 @@ class DashboardPage extends StatelessWidget {
   final List<Widget> _pages = [
     HomePartialPage(),
     SearchPartialPage(),
-    const Scaffold(),
-    const LibraryPartialPage(),
-    const ProfilePartialPage()
+    CreatePartialPage(),
+    LibraryPartialPage(),
+    ProfilePartialPage()
   ];
 
   @override
@@ -45,8 +46,8 @@ class DashboardPage extends StatelessWidget {
               width: Get.width, fit: BoxFit.contain),
           PageView(
             controller: controller,
-            children: _pages,
             physics: const NeverScrollableScrollPhysics(),
+            children: _pages,
           ),
           Obx(() => PopScope(
                 canPop: !menu.locked.value && menu.selected.value == 0,

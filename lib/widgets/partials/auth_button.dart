@@ -71,7 +71,8 @@ class AuthButton extends StatelessWidget {
                             color: Theme.of(context).primaryColorLight)),
                     const TextSpan(text: '.')
                   ])),
-        )
+        ),
+        GestureDetector()
       ],
     );
   }

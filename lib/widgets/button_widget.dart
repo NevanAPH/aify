@@ -14,6 +14,7 @@ class ButtonWidget extends StatelessWidget {
 
   Color? backgroundColor;
   Color? foregroundColor;
+  Widget? prefixIcon;
   double? borderWidth;
   Color? borderColor;
   double? borderRadius;

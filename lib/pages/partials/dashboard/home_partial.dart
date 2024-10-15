@@ -105,7 +105,10 @@ class HomePartialPage extends StatelessWidget {
                                 final music =
                                     creations.my_creations[index] as MusicModel;
                                 return MusicListView(
-                                    action: () {}, music: music);
+                                    onClick: () {}, 
+                                    onLike: () => creations.likeSong(music, creations.getMyCreations),
+                                    liked: music.isLiked ?? false,
+                                    music: music);
                               },
                             ),
                 ),

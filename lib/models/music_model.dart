@@ -5,6 +5,7 @@ class MusicModel {
   final String? description;
   final List<String> tags;
   final String? image;
+  bool? isLiked = false;
 
   MusicModel({
     required this.id,
@@ -12,6 +13,7 @@ class MusicModel {
     required this.description,
     required this.tags,
     required this.image,
+    this.isLiked,
   });
 
   factory MusicModel.from(data) {
@@ -21,6 +23,18 @@ class MusicModel {
       description: data['description'],
       tags: List<String>.from(data['tags']),
       image: data['image'],
+      isLiked: data['isLiked'],
     );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'title': title,
+      'description': description,
+      'tags': tags,
+      'image': image,
+      'isLiked': isLiked,
+    };
   }
 }
