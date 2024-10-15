@@ -1,9 +1,11 @@
+import 'package:aify/controllers/like_controller.dart';
+import 'package:aify/models/liked_model.dart';
 import 'package:aify/models/music_model.dart';
 import 'package:aify/utils/theme.dart';
 import 'package:get/get.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class CreationsController extends GetxController {
+class CreationsController extends LikeController {
   final my_creations = [].obs;
   final my_favorites = [].obs;
   final now_trending = [].obs;
@@ -21,22 +23,11 @@ class CreationsController extends GetxController {
   final SupabaseClient client = Supabase.instance.client;
 
   getMyFavorites() async {
-    try {
-      final res = await client
-          .from('liked_songs')
-          .select('content:content_id (*)')
-          .eq('user_id', client.auth.currentUser!.id);
-      final List<MusicModel> likedList = (res as List)
-          .map((item) => MusicModel.from(item['content']))
-          .toList();
+    await getLiked();
+    final List<LikedModel> myList = musics;
 
-      my_favorites.value = likedList;
-      my_favorites_loaded.value = true;
-
-      return res;
-    } catch (e) {
-      return null;
-    }
+    my_favorites.value = myList;
+    my_favorites_loaded.value = true;
   }
 
   getNowTrending({int? limit}) async {
@@ -181,32 +172,9 @@ class CreationsController extends GetxController {
   }
   
   likeSong(MusicModel song, dynamic call) async {
-    final isLiked = song.isLiked ?? false;
-    song.isLiked = !isLiked;
-
-    try {
-      if (isLiked) {
-      // remove like
-      final res = await client
-            .from('liked_songs')
-            .delete()
-            .eq('user_id', client.auth.currentUser!.id)
-            .eq('content_id', song.id);
-    } else {
-      // add like
-      final res = await client.from('liked_songs').upsert({
-          'user_id': client.auth.currentUser!.id,
-          'content_id': song.id,
-        });
-    }
-    } catch (e) {
-      Get.snackbar(
-        "Error", 
-        "Unable to update like status.",
-        backgroundColor: AppTheme.errorColor,
-        colorText: AppTheme.white100
-      );
-    }
+    // Update the song's liked status using the LikeController
+    song.isLiked = !song.isLiked!;
+    song.isLiked! ? await like(LikedModel(id: song.id, liked: true)) : await unlike(LikedModel(id: song.id, liked: false));
     call();
   }
 }
