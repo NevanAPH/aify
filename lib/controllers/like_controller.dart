@@ -8,7 +8,8 @@ class LikeController extends GetxController {
   static Database? _db;
 
   // list data yang digunakan untuk menampun hasil database, .obs diguanakan di UI
-  var musics = <LikedModel>[].obs;
+  var my_favorites = <LikedModel>[].obs;
+  final my_favorites_loaded = false.obs;
 
   Future<Database?> get db async {
     _db ??= await initDB();
@@ -47,7 +48,7 @@ class LikeController extends GetxController {
   Future<void> getLiked() async {
     final db = await this.db;
     final List<Map<String, dynamic>> results = await db!.query('likes');
-    musics.value = results.map((e) => LikedModel.from(e)).toList();
+    my_favorites.value = results.map((e) => LikedModel.from(e)).toList();
   }
 
   Future<void> clearLiked() async {

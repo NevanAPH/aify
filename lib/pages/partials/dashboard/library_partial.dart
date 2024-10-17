@@ -8,7 +8,6 @@ import 'package:aify/widgets/textfield_widget.dart';
 import 'package:aify/utils/theme.dart';
 import 'package:aify/widgets/partials/dashboard/menu_group.dart';
 import 'package:aify/widgets/partials/dashboard/shimmer_horizontal.dart';
-import 'package:aify/widgets/partials/dashboard/shimmer_vertical.dart';
 import 'package:aify/widgets/partials/music_carousel.dart';
 import 'package:aify/widgets/partials/music_listview.dart';
 import 'package:aify/models/music_model.dart';
@@ -22,9 +21,8 @@ class LibraryPartialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    creations.getMyFavorites();
-    creations.getMyCreations(limit: 7);
-
+    creations.getLiked();
+    
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(minWidth: Get.width),
@@ -89,9 +87,7 @@ class LibraryPartialPage extends StatelessWidget {
                   title: "All your creations",
                   actionName: null,
                   action: null,
-                  child: !creations.my_creations_loaded.value
-                      ? const ShimmerVertical()
-                      : creations.my_creations.isEmpty
+                  child: creations.my_creations.isEmpty
                           ? Container(
                               decoration: BoxDecoration(
                                 color: AppTheme.backgroundLightColor,
@@ -118,8 +114,8 @@ class LibraryPartialPage extends StatelessWidget {
                                     creations.my_creations[index] as MusicModel;
                                 return MusicListView(
                                     onClick: () {}, 
-                                    onLike: () => creations.likeSong(music, creations.getMyCreations),
-                                    liked: music.isLiked ?? false,
+                                    onLike: () => creations.like(music),
+                                    liked: music.liked ?? false,
                                     music: music);
                               },
                             ),

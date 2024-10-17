@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 
 import 'package:aify/utils/theme.dart';
 import 'package:aify/widgets/partials/dashboard/menu_group.dart';
-import 'package:aify/widgets/partials/dashboard/shimmer_horizontal.dart';
 import 'package:aify/widgets/partials/music_carousel.dart';
 import 'package:aify/models/music_model.dart';
 import 'package:aify/controllers/creations_controller.dart';
@@ -19,10 +18,6 @@ class SearchPartialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    creations.getMightLike();
-    creations.getExploreNew();
-    creations.getCreatorPicks();
-
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(minWidth: Get.width),
@@ -44,9 +39,7 @@ class SearchPartialPage extends StatelessWidget {
                   title: "You might like",
                   actionName: "See more",
                   action: () {},
-                  child: !creations.explore_new_loaded.value
-                      ? const ShimmerHorizontal()
-                      : SizedBox(
+                  child: SizedBox(
                           height:
                               creations.might_like.isEmpty ? 100 : 160,
                           child: SingleChildScrollView(
@@ -86,9 +79,7 @@ class SearchPartialPage extends StatelessWidget {
                   title: "Explore new",
                   actionName: "See more",
                   action: () {},
-                  child: !creations.explore_new_loaded.value
-                      ? const ShimmerHorizontal()
-                      : SizedBox(
+                  child: SizedBox(
                           height:
                               creations.explore_new.isEmpty ? 100 : 160,
                           child: SingleChildScrollView(
@@ -128,9 +119,7 @@ class SearchPartialPage extends StatelessWidget {
                   title: "Top creator picks",
                   actionName: "See more",
                   action: () {},
-                  child: !creations.creator_picks_loaded.value
-                      ? const ShimmerHorizontal()
-                      : SizedBox(
+                  child: SizedBox(
                           height:
                               creations.creator_picks.isEmpty ? 100 : 160,
                           child: SingleChildScrollView(

@@ -5,7 +5,6 @@ import 'package:aify/controllers/auth_controller.dart';
 import 'package:aify/controllers/menus_controller.dart';
 import 'package:aify/pages/partials/auth/login_partial.dart';
 import 'package:aify/pages/partials/auth/sendreset_partial.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -27,7 +26,7 @@ class LoginPage extends StatelessWidget {
     });
 
     if (params.containsKey('selected')) {
-      menu.setSelected(toInt(params['selected'])!);
+      menu.setSelected(int.parse(params['selected']!));
     }
 
     return Scaffold(

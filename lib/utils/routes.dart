@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 // Import pages
 import 'package:aify/pages/welcome_page.dart';
@@ -17,10 +16,9 @@ List<GetPage> pages = [
       name: '/',
       page: () {
         Future.delayed(const Duration(seconds: 0), () async {
-          final supabase = Supabase.instance.client;
-          if (supabase.auth.currentUser != null) {
-            return Get.offAllNamed('/home');
-          }
+          // if (supabase.auth.currentUser != null) {
+          //   return Get.offAllNamed('/home');
+          // }
           return Get.offAllNamed('/welcome');
         });
         return const Scaffold();

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'package:aify/utils/theme.dart';
 import 'package:aify/utils/routes.dart';
@@ -14,13 +13,6 @@ Future<void> main() async {
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
     )
-  );
-
-  // Supabase initialization
-  await Supabase.initialize(
-    url: Environments.supabaseUrl,
-    anonKey: Environments.supabaseAnonKey,
-    debug: Environments.debug,
   );
 
   runApp(const MyApp());

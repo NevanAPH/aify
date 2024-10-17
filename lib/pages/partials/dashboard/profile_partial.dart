@@ -3,12 +3,10 @@ import 'package:aify/utils/theme.dart';
 import 'package:aify/widgets/button_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfilePartialPage extends StatelessWidget {
   ProfilePartialPage({super.key});
 
-  final supabase = Supabase.instance.client;
   final CreationsController creations = Get.find();
 
   @override
@@ -53,7 +51,6 @@ class ProfilePartialPage extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 24),
                 child: ButtonWidget('Logout', variant: ButtonVariant.danger,
                   onPressed: () async {
-                await supabase.auth.signOut();
                 Get.offAllNamed('/welcome');
               }),
               )
@@ -65,12 +62,12 @@ class ProfilePartialPage extends StatelessWidget {
   }
 
   String getFullName() {
-    final metadata = supabase.auth.currentUser!.userMetadata;
-    if (metadata != null &&
-        metadata.containsKey('first_name') &&
-        metadata.containsKey('last_name')) {
-      return "${metadata['first_name'] as String} ${metadata['last_name'] as String}";
-    }
+    // final metadata = supabase.auth.currentUser!.userMetadata;
+    // if (metadata != null &&
+    //     metadata.containsKey('first_name') &&
+    //     metadata.containsKey('last_name')) {
+    //   return "${metadata['first_name'] as String} ${metadata['last_name'] as String}";
+    // }
     return "Unknown Name";
   }
 }

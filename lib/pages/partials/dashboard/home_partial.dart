@@ -5,8 +5,6 @@ import 'package:get/get.dart';
 
 import 'package:aify/utils/theme.dart';
 import 'package:aify/widgets/partials/dashboard/menu_group.dart';
-import 'package:aify/widgets/partials/dashboard/shimmer_horizontal.dart';
-import 'package:aify/widgets/partials/dashboard/shimmer_vertical.dart';
 import 'package:aify/widgets/partials/music_carousel.dart';
 import 'package:aify/widgets/partials/music_listview.dart';
 import 'package:aify/models/music_model.dart';
@@ -20,9 +18,6 @@ class HomePartialPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    creations.getNowTrending();
-    creations.getMyCreations();
-
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(minWidth: Get.width),
@@ -34,9 +29,7 @@ class HomePartialPage extends StatelessWidget {
                   title: "Now Trending",
                   actionName: "See more",
                   action: () => menu.selected.value = 1,
-                  child: !creations.now_trending_loaded.value
-                      ? const ShimmerHorizontal()
-                      : SizedBox(
+                  child: SizedBox(
                           height:
                               creations.now_trending.isEmpty ? 100 : 160,
                           child: SingleChildScrollView(
@@ -77,9 +70,7 @@ class HomePartialPage extends StatelessWidget {
                   title: "Your last creations",
                   actionName: "Library",
                   action: () => menu.selected.value = 3,
-                  child: !creations.my_creations_loaded.value
-                      ? const ShimmerVertical()
-                      : creations.my_creations.isEmpty
+                  child: creations.my_creations.isEmpty
                           ? Container(
                               decoration: BoxDecoration(
                                 color: AppTheme.backgroundLightColor,
@@ -106,8 +97,8 @@ class HomePartialPage extends StatelessWidget {
                                     creations.my_creations[index] as MusicModel;
                                 return MusicListView(
                                     onClick: () {}, 
-                                    onLike: () => creations.likeSong(music, creations.getMyCreations),
-                                    liked: music.isLiked ?? false,
+                                    onLike: () => creations.like(music),
+                                    liked: music.liked,
                                     music: music);
                               },
                             ),

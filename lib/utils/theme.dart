@@ -1,6 +1,4 @@
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   static const Color primaryColor = Color(0xFF3D84EE);
@@ -31,68 +29,72 @@ class AppTheme {
 
   static ThemeData getThemeData() {
     return ThemeData(
-      useMaterial3: true,
+        useMaterial3: true,
+        primaryColor: AppTheme.primaryColor,
+        primaryColorLight: AppTheme.primaryColorLight,
+        primaryColorDark: AppTheme.primaryColorDark,
+        scaffoldBackgroundColor: AppTheme.backgroundColor,
+        hintColor: AppTheme.hintColor,
+        textTheme: const TextTheme(
+          // Title
+          titleLarge: TextStyle(
+            fontFamily: 'Outfit',
+            color: AppTheme.textPrimaryColor,
+            fontSize: 50,
+            fontWeight: FontWeight.w600,
+          ),
+          titleMedium: TextStyle(
+            fontFamily: 'Outfit',
+            color: AppTheme.textPrimaryColor,
+            fontSize: 36,
+            fontWeight: FontWeight.w600,
+          ),
+          titleSmall: TextStyle(
+            fontFamily: 'Outfit',
+            color: AppTheme.textPrimaryColor,
+            fontSize: 28,
+            fontWeight: FontWeight.w600,
+          ),
 
-      primaryColor: AppTheme.primaryColor,
-      primaryColorLight: AppTheme.primaryColorLight,
-      primaryColorDark: AppTheme.primaryColorDark,
-      scaffoldBackgroundColor: AppTheme.backgroundColor,
+          // Body
+          bodyLarge: TextStyle(
+            fontFamily: 'Outfit',
+            color: AppTheme.textSecondaryColor,
+            fontSize: 20,
+            fontWeight: FontWeight.w300,
+          ),
+          bodyMedium: TextStyle(
+            fontFamily: 'Outfit',
+            color: AppTheme.textSecondaryColor,
+            fontSize: 18,
+            fontWeight: FontWeight.w300,
+          ),
+          bodySmall: TextStyle(
+            fontFamily: 'Outfit',
+            color: AppTheme.hintColor,
+            fontSize: 15,
+            fontWeight: FontWeight.w300,
+          ),
 
-      hintColor: AppTheme.hintColor,
-      textTheme: TextTheme(
-
-        // Title
-        titleLarge: GoogleFonts.getFont('Outfit', 
-          color: AppTheme.textPrimaryColor,
-          fontSize: 50,
-          fontWeight: FontWeight.w600,
-        ),
-        titleMedium: GoogleFonts.getFont('Outfit', 
-          color: AppTheme.textPrimaryColor,
-          fontSize: 36,
-          fontWeight: FontWeight.w600,
-        ),
-        titleSmall: GoogleFonts.getFont('Outfit', 
-          color: AppTheme.textPrimaryColor,
-          fontSize: 28,
-          fontWeight: FontWeight.w600,
-        ),
-
-        // Body
-        bodyLarge: GoogleFonts.getFont('Outfit', 
-          color: AppTheme.textSecondaryColor,
-          fontSize: 20,
-          fontWeight: FontWeight.w300,
-        ),
-        bodyMedium: GoogleFonts.getFont('Outfit', 
-          color: AppTheme.textSecondaryColor,
-          fontSize: 18,
-          fontWeight: FontWeight.w300,
-        ),
-        bodySmall: GoogleFonts.getFont('Outfit', 
-          color: AppTheme.hintColor,
-          fontSize: 15,
-          fontWeight: FontWeight.w300,
-        ),
-
-        // Label
-        labelLarge: GoogleFonts.getFont('Outfit', 
-          color: AppTheme.textSecondaryColor,
-          fontSize: 20,
-          fontWeight: FontWeight.w600,
-        ),
-        labelMedium: GoogleFonts.getFont('Outfit', 
-          color: AppTheme.textSecondaryColor,
-          fontSize: 18,
-          fontWeight: FontWeight.w500,
-        ),
-        labelSmall: GoogleFonts.getFont('Outfit', 
-          color: AppTheme.textSecondaryColor,
-          fontSize: 15,
-          fontWeight: FontWeight.w400,
-        ),
-
-      )
-    );
+          // Label
+          labelLarge: TextStyle(
+            fontFamily: 'Outfit',
+            color: AppTheme.textSecondaryColor,
+            fontSize: 20,
+            fontWeight: FontWeight.w600,
+          ),
+          labelMedium: TextStyle(
+            fontFamily: 'Outfit',
+            color: AppTheme.textSecondaryColor,
+            fontSize: 18,
+            fontWeight: FontWeight.w500,
+          ),
+          labelSmall: TextStyle(
+            fontFamily: 'Outfit',
+            color: AppTheme.textSecondaryColor,
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+          ),
+        ));
   }
 }

@@ -1,20 +1,20 @@
 
-class MusicModel {
-  final String id;
+import 'package:aify/models/liked_model.dart';
+
+class MusicModel extends LikedModel {
   final String title;
   final String? description;
   final List<String> tags;
   final String? image;
-  bool? isLiked = false;
 
   MusicModel({
-    required this.id,
+    required String id,
+    required bool liked,
     required this.title,
     required this.description,
     required this.tags,
     required this.image,
-    this.isLiked,
-  });
+  }) : super(id: id, liked: liked);
 
   factory MusicModel.from(data) {
     return MusicModel(
@@ -23,7 +23,7 @@ class MusicModel {
       description: data['description'],
       tags: List<String>.from(data['tags']),
       image: data['image'],
-      isLiked: data['isLiked'],
+      liked: data['liked'],
     );
   }
 
@@ -34,7 +34,7 @@ class MusicModel {
       'description': description,
       'tags': tags,
       'image': image,
-      'isLiked': isLiked,
+      'liked': liked,
     };
   }
 }
