@@ -60,7 +60,7 @@ class HomePartialPage extends StatelessWidget {
                                         .map((music) {
                                       return MusicCarousel(
                                           action: () {},
-                                          music: music as MusicModel);
+                                          music: music);
                                     })),
                                   ),
                           ),

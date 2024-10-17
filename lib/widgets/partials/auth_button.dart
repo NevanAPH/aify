@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:aify/widgets/button_widget.dart';
 
 class AuthButton extends StatelessWidget {
@@ -58,15 +57,15 @@ class AuthButton extends StatelessWidget {
                   children: [
                     TextSpan(
                         text: 'Terms',
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () async => await launchUrl(termsUri),
+                        recognizer: TapGestureRecognizer(),
+                          // ..onTap = () async => await launchUrl(termsUri),
                         style: Theme.of(context).textTheme.labelSmall!.copyWith(
                             color: Theme.of(context).primaryColorLight)),
                     const TextSpan(text: ' and '),
                     TextSpan(
                         text: 'Privacy Policy',
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () async => await launchUrl(privacyUri),
+                        recognizer: TapGestureRecognizer(),
+                          // ..onTap = () async => await launchUrl(privacyUri),
                         style: Theme.of(context).textTheme.labelSmall!.copyWith(
                             color: Theme.of(context).primaryColorLight)),
                     const TextSpan(text: '.')
